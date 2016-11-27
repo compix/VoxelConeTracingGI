@@ -1,0 +1,33 @@
+#version 430
+
+uniform ivec3 u_min;
+uniform int u_resolution;
+uniform int u_clipmapLevel;
+uniform ivec3 u_extent;
+uniform int u_borderWidth = 1;
+
+uniform writeonly image3D u_image;
+
+layout (local_size_x = 8, local_size_y = 8, local_size_z = 8) in;
+void main()
+{
+    if (gl_GlobalInvocationID.x >= u_extent.x ||
+        gl_GlobalInvocationID.y >= u_extent.y ||
+        gl_GlobalInvocationID.z >= u_extent.z) return;
+        
+    ivec3 pos = (ivec3(gl_GlobalInvocationID) + u_min) & (u_resolution - 1);
+    
+    int resolution = u_resolution + 2 * u_borderWidth;
+    pos += ivec3(u_borderWidth);
+    
+    // Target correct clipmap level
+    pos.y += u_clipmapLevel * resolution;
+    
+    // Clear all faces
+    imageStore(u_image, pos, vec4(0.0));
+    imageStore(u_image, pos + ivec3(resolution, 0, 0), vec4(0.0));
+    imageStore(u_image, pos + ivec3(2 * resolution, 0, 0), vec4(0.0));
+    imageStore(u_image, pos + ivec3(3 * resolution, 0, 0), vec4(0.0));
+    imageStore(u_image, pos + ivec3(4 * resolution, 0, 0), vec4(0.0));
+    imageStore(u_image, pos + ivec3(5 * resolution, 0, 0), vec4(0.0));
+}
