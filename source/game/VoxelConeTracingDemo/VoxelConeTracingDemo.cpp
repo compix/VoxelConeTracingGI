@@ -131,8 +131,6 @@ void VoxelConeTracingDemo::update()
     m_gui->onVoxelVisualization();
 
     DebugRenderer::end();
-
-    GL_ERROR_CHECK();
 }
 
 void VoxelConeTracingDemo::moveCamera(Seconds deltaTime) const
@@ -195,10 +193,10 @@ void VoxelConeTracingDemo::init3DVoxelTextures()
 
     // Each anisotropic voxel needs multiple values (per face = 6). Furthermore multiple clipmap regions are required.
     // Per attribute everything is stored in one 3D texture:
-    // In X Direction -> clipmap L0,L1,...,Ln
-    // In Y Direction -> voxelFace0,voxelFace1,...,voxelFace5
+    // In X Direction -> voxelFace0,voxelFace1,...,voxelFace5
+    // In Y Direction -> clipmap L0,L1,...,Ln
     // So the position in [0, resolution - 1]^3 of a specific inner texture is accessed by:
-    // samplePos(x, y, z, faceIndex, clipmapLevel) = (x, y, z) + (faceIndex, clipmapLevel) * resolution
+    // samplePos(x, y, z, faceIndex, clipmapLevel) = (x, y, z) + (faceIndex, clipmapLevel, 0) * resolution
     // To ensure correct interpolation at borders we thus need to extend the resolution of each inner texture
     // by 2 in each dimension and copy in a dedicated render pass (WrapBorderPass) the border of the other side
     // to get GL_REPEAT as the texture wrapping mode.
