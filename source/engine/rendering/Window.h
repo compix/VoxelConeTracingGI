@@ -24,7 +24,7 @@ public:
     void showMessageBox(const std::string& title, const std::string& message, Uint32 flags = SDL_MESSAGEBOX_INFORMATION);
     void showErrorBox(const std::string& title, const std::string& message);
 private:
-    bool init(bool enableVsync, int oglMajorVersion = 4, int oglMinorVersion = 3);
+    bool init(bool enableVsync, int oglMajorVersion = 4, int oglMinorVersion = 4);
 
 private:
     SDL_Window* m_window;
