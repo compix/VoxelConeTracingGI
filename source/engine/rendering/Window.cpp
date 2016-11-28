@@ -68,7 +68,7 @@ bool Window::init(bool enableVsync, int oglMajorVersion, int oglMinorVersion)
     SDL_GL_SetAttribute(SDL_GL_MULTISAMPLESAMPLES, 8);
     //SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE, 8);
 
-    m_window = SDL_CreateWindow("Hello World!",
+    m_window = SDL_CreateWindow("Voxel Cone Tracing GI",
                                 SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
                                 m_width, m_height,
                                 SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
