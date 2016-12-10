@@ -1,11 +1,11 @@
-# Real-Time Indirect Illumination with Voxel Cone Tracing (VCT)
+# Real-Time Indirect Illumination with Voxel Cone Tracing
 ## Overview
 Check out [Implementation-Overview.pdf](https://github.com/compix/VoxelConeTracingGI/blob/master/Implementation-Overview.pdf)
 
 ![Overview](https://github.com/compix/VoxelConeTracingGI/blob/master/images/Overview.png)
 
 ## Features
-* One bounce indirect illumination (diffuse + specular) with VCT
+* One bounce indirect illumination (diffuse + specular) with Voxel Cone Tracing (VCT)
 * Emission with VCT
 * 3D Clipmap to support a huge area around the camera
 * Ambient Occlusion with VCT
@@ -16,6 +16,7 @@ Check out [Implementation-Overview.pdf](https://github.com/compix/VoxelConeTraci
 * Hardly any performance optimizations
 * Noticeable indirect illumination changes when the camera moves (because a clipmap is used)
 * Perfect reflections aren't practical with VCT because the voxelized scene is only a rough approximation
+* Light leaking (VCT is just an approximation of cone tracing)
 
 ## Screenshots
 ![GI](https://github.com/compix/VoxelConeTracingGI/blob/master/images/GI.png)
