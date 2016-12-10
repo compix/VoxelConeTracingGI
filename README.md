@@ -1,6 +1,6 @@
 # Real-Time Indirect Illumination with Voxel Cone Tracing (VCT)
 ## Overview
-Check out *Implementation-Overview.pdf*
+Check out [Implementation-Overview.pdf](https://github.com/compix/VoxelConeTracingGI/blob/master/Implementation-Overview.pdf)
 
 ![Overview](https://github.com/compix/VoxelConeTracingGI/blob/master/images/Overview.png)
 
@@ -11,7 +11,7 @@ Check out *Implementation-Overview.pdf*
 * Ambient Occlusion with VCT
 
 ## Issues
-* No converage based voxelization (anti-aliasing voxelization)
+* No coverage based voxelization (anti-aliasing voxelization)
   * Leads to discrete indirect illumination changes when objects move
 * Hardly any performance optimizations
 * Noticeable indirect illumination changes when the camera moves (because a clipmap is used)
