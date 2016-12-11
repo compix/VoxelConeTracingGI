@@ -9,6 +9,7 @@ Check out [Implementation-Overview.pdf](https://github.com/compix/VoxelConeTraci
 * Emission with VCT
 * 3D Clipmap to support a huge area around the camera
 * Ambient Occlusion with VCT
+* Fully dynamic scenes
 
 ## Issues
 * No coverage based voxelization (anti-aliasing voxelization)
