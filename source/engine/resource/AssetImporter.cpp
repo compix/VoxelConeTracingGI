@@ -46,7 +46,7 @@ void addTextures(unsigned type, aiMaterial* material, std::vector<std::string>& 
     }
 }
 
-void setColor(char* pKey, unsigned type, unsigned idx, aiMaterial* material, const glm::vec3& defaultColor, glm::vec3& colorOut)
+void setColor(const char* pKey, unsigned type, unsigned idx, aiMaterial* material, const glm::vec3& defaultColor, glm::vec3& colorOut)
 {
     aiColor3D color;
     if (AI_SUCCESS == material->Get(pKey, type, idx, color))
@@ -55,7 +55,7 @@ void setColor(char* pKey, unsigned type, unsigned idx, aiMaterial* material, con
         colorOut = defaultColor;
 }
 
-void setFloat(char* pKey, unsigned type, unsigned idx, aiMaterial* material, float defaultVal, float& vOut)
+void setFloat(const char* pKey, unsigned type, unsigned idx, aiMaterial* material, float defaultVal, float& vOut)
 {
     float val;
     if (AI_SUCCESS == material->Get(pKey, type, idx, val))

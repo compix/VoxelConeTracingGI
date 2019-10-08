@@ -1,6 +1,7 @@
 #pragma once
 #include <glm/glm.hpp>
 #include <stdint.h>
+#include <initializer_list>
 
 class BBox
 {

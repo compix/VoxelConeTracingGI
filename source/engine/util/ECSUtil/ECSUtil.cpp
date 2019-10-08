@@ -1,5 +1,5 @@
 #include "ECSUtil.h"
-#include <engine/ecs/ecs.h>
+#include <engine/ecs/ECS.h>
 #include <engine/resource/ResourceManager.h>
 #include <engine/util/math.h>
 #include <engine/rendering/Material.h>

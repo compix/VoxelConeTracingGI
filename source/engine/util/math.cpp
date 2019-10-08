@@ -1,5 +1,6 @@
 #include "math.h"
 #include "colors.h"
+#include <cmath>
 
 void math::rotate(glm::vec2& p, const float& angle)
 {
@@ -184,14 +185,14 @@ glm::quat math::eulerYXZQuat(const glm::vec3& eulerAngles) { return eulerYXZQuat
 
 glm::quat math::eulerYXZQuat(float yaw, float pitch, float roll)
 {
-    float cy = std::cosf(yaw * 0.5f);
-    float sy = std::sinf(yaw * 0.5f);
+    float cy = cosf(yaw * 0.5f);
+    float sy = sinf(yaw * 0.5f);
 
-    float cp = std::cosf(pitch * 0.5f);
-    float sp = std::sinf(pitch * 0.5f);
+    float cp = cosf(pitch * 0.5f);
+    float sp = sinf(pitch * 0.5f);
 
-    float cr = std::cosf(roll * 0.5f);
-    float sr = std::sinf(roll * 0.5f);
+    float cr = cosf(roll * 0.5f);
+    float sr = sinf(roll * 0.5f);
 
     return glm::quat(cy * cp * cr + sy * sp * sr,
                      cy * sp * cr + sy * cp * sr,

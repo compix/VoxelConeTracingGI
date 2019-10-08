@@ -1,3 +1,5 @@
+build/
+
 # User defined
 [Bb]ackup*/
 CMakeLists.txt.user

@@ -6,6 +6,7 @@
 #include <iostream>
 #include <GL/glew.h>
 #include <engine/resource/ResourceManager.h>
+#include <dirent.h>
 
 namespace file
 {
@@ -91,6 +92,27 @@ void file::forEachFileInDirectory(const std::string& directoryPath, bool recursi
 }
 #else
 // TODO: Write unix version
+void file::forEachFileInDirectory(const std::string& directoryPath, bool recursive, const file::DirectoryIterationFunction& fileFunc)
+{
+    DIR *dir;
+    if ((dir = opendir(directoryPath.c_str())) == NULL) {
+        std::cout << "No directory: " << directoryPath << std::endl;
+        return;
+    }
+
+    struct dirent *file;
+    while((file = readdir(dir)) != NULL) {
+        std::string filename(file->d_name);
+        if (filename == "." || filename == "..") continue;
+        std::string fullFilename = directoryPath + "/" + filename;
+        bool isDirectory = file->d_type == DT_DIR;
+
+        fileFunc(directoryPath, filename, isDirectory);
+        if(isDirectory && recursive) {
+            forEachFileInDirectory(fullFilename, recursive, fileFunc);
+        }
+    }
+}
 #endif
 
 file::ShaderSourceInfo resolveShaderIncludes(const std::string& shaderPath, const std::string& source, size_t lineStart)

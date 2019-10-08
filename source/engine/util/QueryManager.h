@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <vector>
 #include <unordered_map>
 #include "GLQueryObject.h"
 #include "Timer.h"

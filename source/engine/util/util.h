@@ -1,6 +1,7 @@
 #pragma once
 #include <engine/geometry/BBox.h>
 #include <vector>
+#include <string>
 
 class Mesh;
 

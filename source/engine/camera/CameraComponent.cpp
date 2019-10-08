@@ -246,15 +246,15 @@ Frustum CameraComponent::getFrustum(float nearZ, float farZ) const
     float yFar = farZ * thVFOV;
 
     // Transform to world space
-    frustum.nearBottomLeft = glm::vec3(m_viewInv * glm::vec4(-xNear, -yNear, nearZ, 1.0f));
-    frustum.nearBottomRight = glm::vec3(m_viewInv * glm::vec4(xNear, -yNear, nearZ, 1.0f));
-    frustum.nearTopLeft = glm::vec3(m_viewInv * glm::vec4(-xNear, yNear, nearZ, 1.0f));
-    frustum.nearTopRight = glm::vec3(m_viewInv * glm::vec4(xNear, yNear, nearZ, 1.0f));
+    frustum.data.nearBottomLeft = glm::vec3(m_viewInv * glm::vec4(-xNear, -yNear, nearZ, 1.0f));
+    frustum.data.nearBottomRight = glm::vec3(m_viewInv * glm::vec4(xNear, -yNear, nearZ, 1.0f));
+    frustum.data.nearTopLeft = glm::vec3(m_viewInv * glm::vec4(-xNear, yNear, nearZ, 1.0f));
+    frustum.data.nearTopRight = glm::vec3(m_viewInv * glm::vec4(xNear, yNear, nearZ, 1.0f));
 
-    frustum.farBottomLeft = glm::vec3(m_viewInv * glm::vec4(-xFar, -yFar, farZ, 1.0f));
-    frustum.farBottomRight = glm::vec3(m_viewInv * glm::vec4(xFar, -yFar, farZ, 1.0f));
-    frustum.farTopLeft = glm::vec3(m_viewInv * glm::vec4(-xFar, yFar, farZ, 1.0f));
-    frustum.farTopRight = glm::vec3(m_viewInv * glm::vec4(xFar, yFar, farZ, 1.0f));
+    frustum.data.farBottomLeft = glm::vec3(m_viewInv * glm::vec4(-xFar, -yFar, farZ, 1.0f));
+    frustum.data.farBottomRight = glm::vec3(m_viewInv * glm::vec4(xFar, -yFar, farZ, 1.0f));
+    frustum.data.farTopLeft = glm::vec3(m_viewInv * glm::vec4(-xFar, yFar, farZ, 1.0f));
+    frustum.data.farTopRight = glm::vec3(m_viewInv * glm::vec4(xFar, yFar, farZ, 1.0f));
 
     /*
     glm::vec4 nearBottomLeft  = m_viewProjInv * glm::vec4(-1.0f, -1.0f, -1.0f, 1.0f);

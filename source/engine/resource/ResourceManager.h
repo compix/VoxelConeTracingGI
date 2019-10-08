@@ -4,6 +4,7 @@
 #include <unordered_map>
 #include "Model.h"
 #include <engine/rendering/shader/Shader.h>
+#include <engine/rendering/renderer/MeshRenderer.h>
 
 class Material;
 

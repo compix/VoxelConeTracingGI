@@ -3,7 +3,7 @@
 #include <engine/ecs/EntityManager.h>
 #include <engine/camera/CameraComponent.h>
 #include <engine/geometry/Transform.h>
-#include <gl/glew.h>
+#include <GL/glew.h>
 #include <engine/rendering/architecture/RenderPipeline.h>
 #include <engine/input/Input.h>
 #include "StatsWindow.h"

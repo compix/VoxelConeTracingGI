@@ -9,7 +9,7 @@
 #include <engine/resource/ResourceManager.h>
 #include <fstream>
 #include <engine/rendering/architecture/RenderPipeline.h>
-#include <engine/ecs/ecs.h>
+#include <engine/ecs/ECS.h>
 #include <engine/rendering/lights/DirectionalLight.h>
 #include "engine/rendering/voxelConeTracing/VoxelizationPass.h"
 #include "engine/rendering/debug/DebugRenderer.h"

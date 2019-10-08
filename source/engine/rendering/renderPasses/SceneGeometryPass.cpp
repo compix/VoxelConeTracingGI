@@ -2,7 +2,7 @@
 #include <engine/rendering/Screen.h>
 #include <engine/camera/CameraComponent.h>
 #include <engine/rendering/architecture/RenderPipeline.h>
-#include <engine/ecs/ecs.h>
+#include <engine/ecs/ECS.h>
 #include <engine/resource/ResourceManager.h>
 #include "engine/util/ECSUtil/ECSUtil.h"
 #include "engine/rendering/voxelConeTracing/settings/VoxelConeTracingSettings.h"

@@ -1,5 +1,5 @@
 #include "ForwardScenePass.h"
-#include <gl/glew.h>
+#include <GL/glew.h>
 #include <engine/resource/ResourceManager.h>
 #include <engine/rendering/architecture/RenderPipeline.h>
 #include <engine/util/functions.h>

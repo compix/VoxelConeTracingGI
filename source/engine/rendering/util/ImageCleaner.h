@@ -1,5 +1,5 @@
 #pragma once
-#include <gl/glew.h>
+#include <GL/glew.h>
 #include <memory>
 #include <engine/rendering/shader/Shader.h>
 

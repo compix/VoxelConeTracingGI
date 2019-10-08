@@ -146,20 +146,20 @@ void Visualizer::visualize3DTexture(GLuint texture, const glm::vec3& position, u
 
 void Visualizer::showFrustum(const Frustum& frustum)
 {
-    DebugRenderer::drawVolumetricLine(frustum.nearBottomLeft, frustum.nearBottomRight);
-    DebugRenderer::drawVolumetricLine(frustum.nearBottomRight, frustum.nearTopRight);
-    DebugRenderer::drawVolumetricLine(frustum.nearTopRight, frustum.nearTopLeft);
-    DebugRenderer::drawVolumetricLine(frustum.nearTopLeft, frustum.nearBottomLeft);
+    DebugRenderer::drawVolumetricLine(frustum.data.nearBottomLeft, frustum.data.nearBottomRight);
+    DebugRenderer::drawVolumetricLine(frustum.data.nearBottomRight, frustum.data.nearTopRight);
+    DebugRenderer::drawVolumetricLine(frustum.data.nearTopRight, frustum.data.nearTopLeft);
+    DebugRenderer::drawVolumetricLine(frustum.data.nearTopLeft, frustum.data.nearBottomLeft);
 
-    DebugRenderer::drawVolumetricLine(frustum.farBottomLeft, frustum.farBottomRight);
-    DebugRenderer::drawVolumetricLine(frustum.farBottomRight, frustum.farTopRight);
-    DebugRenderer::drawVolumetricLine(frustum.farTopRight, frustum.farTopLeft);
-    DebugRenderer::drawVolumetricLine(frustum.farTopLeft, frustum.farBottomLeft);
+    DebugRenderer::drawVolumetricLine(frustum.data.farBottomLeft, frustum.data.farBottomRight);
+    DebugRenderer::drawVolumetricLine(frustum.data.farBottomRight, frustum.data.farTopRight);
+    DebugRenderer::drawVolumetricLine(frustum.data.farTopRight, frustum.data.farTopLeft);
+    DebugRenderer::drawVolumetricLine(frustum.data.farTopLeft, frustum.data.farBottomLeft);
 
-    DebugRenderer::drawVolumetricLine(frustum.nearBottomLeft, frustum.farBottomLeft);
-    DebugRenderer::drawVolumetricLine(frustum.nearBottomRight, frustum.farBottomRight);
-    DebugRenderer::drawVolumetricLine(frustum.nearTopRight, frustum.farTopRight);
-    DebugRenderer::drawVolumetricLine(frustum.nearTopLeft, frustum.farTopLeft);
+    DebugRenderer::drawVolumetricLine(frustum.data.nearBottomLeft, frustum.data.farBottomLeft);
+    DebugRenderer::drawVolumetricLine(frustum.data.nearBottomRight, frustum.data.farBottomRight);
+    DebugRenderer::drawVolumetricLine(frustum.data.nearTopRight, frustum.data.farTopRight);
+    DebugRenderer::drawVolumetricLine(frustum.data.nearTopLeft, frustum.data.farTopLeft);
 }
 
 std::unique_ptr<SimpleMeshRenderer> Visualizer::initTexture3DRenderer(int resolution)
