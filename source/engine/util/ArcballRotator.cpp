@@ -1,5 +1,6 @@
 #include "ArcballRotator.h"
 #include <algorithm>
+#include <cmath>
 #include "engine/geometry/Rect.h"
 
 void ArcballRotator::onRotationUpdate(const Rect& viewport, const glm::mat4& viewInverse, const glm::vec2& startDragPos, const glm::vec2& curDragPos)
@@ -18,7 +19,7 @@ void ArcballRotator::onRotationUpdate(const Rect& viewport, const glm::mat4& vie
     m_curArcballVector = computeArcballVector(curPos);
     glm::vec3 toEnd = glm::vec3(viewInverse * glm::vec4(m_curArcballVector, 0.0f));
 
-    float angle = m_speed * std::acosf(std::min(1.0f, glm::dot(toStart, toEnd)));
+    float angle = m_speed * acosf(std::min(1.0f, glm::dot(toStart, toEnd)));
     glm::vec3 rotationAxis = glm::normalize(glm::cross(toStart, toEnd));
     m_rotation = glm::angleAxis(angle, rotationAxis) * m_rotationBeforeDrag;
 }
@@ -37,7 +38,7 @@ glm::vec3 ArcballRotator::computeArcballVector(glm::vec2 pos) const
     glm::vec3 v = glm::vec3(pos, 0.0f);
     float sq = v.x * v.x + v.y * v.y;
     if (sq <= r * r)
-        v.z = -std::sqrtf(r * r - sq);
+        v.z = -sqrtf(r * r - sq);
 
     return glm::normalize(v);
 }

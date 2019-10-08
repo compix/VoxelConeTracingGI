@@ -28,7 +28,7 @@ public:
     const glm::vec3& getArcballVector() const { return m_curArcballVector; }
 
 private:
-    glm::vec3 ArcballRotator::computeArcballVector(glm::vec2 pos) const;
+    glm::vec3 computeArcballVector(glm::vec2 pos) const;
 
     glm::vec3 m_curArcballVector;
     glm::quat m_rotation;

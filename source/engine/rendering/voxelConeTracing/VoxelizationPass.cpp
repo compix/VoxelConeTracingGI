@@ -4,7 +4,7 @@
 #include <engine/util/Logger.h>
 #include <engine/geometry/BBox.h>
 #include <engine/rendering/architecture/RenderPipeline.h>
-#include <engine/ecs/ecs.h>
+#include <engine/ecs/ECS.h>
 #include <engine/resource/ResourceManager.h>
 #include <engine/rendering/util/ImageCleaner.h>
 #include <engine/rendering/renderer/MeshRenderer.h>

@@ -26,8 +26,8 @@ struct GUITexture
         glTexParameteriv(GL_TEXTURE_2D, GL_TEXTURE_SWIZZLE_RGBA, originalSwizzleMask);
     }
 
-    GLint originalSwizzleMask[4];
-    GLint swizzleMask[4]{ GL_RED, GL_GREEN, GL_BLUE, GL_ALPHA };
     std::string label;
-    GLuint texID{ 0 };
+    GLuint texID = 0;
+    GLint swizzleMask[4] = { GL_RED, GL_GREEN, GL_BLUE, GL_ALPHA };
+    GLint originalSwizzleMask[4];
 };

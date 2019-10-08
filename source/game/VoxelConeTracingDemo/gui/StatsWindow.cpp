@@ -80,11 +80,11 @@ void StatsWindow::onElapsedTimeInfoItem(const ElapsedTimeInfoBag& timeInfo, Quer
 
         std::stringstream ss;
         ss << "Average in the last second: " << timeInfo[selectedType].getAverageInMicroseconds() / 1000.0 << " ms";
-        ImGui::Text(ss.str().c_str());
+        ImGui::TextUnformatted(ss.str().c_str());
         ss.str("");
         ss.clear();
         ss << "Highest in the last second: " << timeInfo[selectedType].getMaxInMicroseconds() / 1000.0 << " ms";
-        ImGui::Text(ss.str().c_str());
+        ImGui::TextUnformatted(ss.str().c_str());
 
         plotHistogram(timeInfo[selectedType], guiData);
         ImGui::TreePop();

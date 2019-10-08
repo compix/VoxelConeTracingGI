@@ -2,7 +2,7 @@
 #include <cstdint>
 #include <cassert>
 #include "EntityManager.h"
-#include "ecs.h"
+#include "ECS.h"
 
 namespace ecs_test
 {

@@ -2,6 +2,7 @@
 #include <GL/glew.h>
 #include <string>
 #include <memory>
+#include <vector>
 #include "Texture2D.h"
 #include <unordered_map>
 

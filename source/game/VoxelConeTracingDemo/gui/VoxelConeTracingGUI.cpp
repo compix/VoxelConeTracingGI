@@ -212,7 +212,7 @@ void VoxelConeTracingGUI::subTree(const ComponentPtr<Transform>& transform)
 
     if (transform->hasChildren())
     {
-        bool nodeOpen = ImGui::TreeNodeEx((void*)(intptr_t)m_treeNodeIdx, nodeFlags | selectedFlag, entityName.c_str());
+        bool nodeOpen = ImGui::TreeNodeEx((void*)(intptr_t)m_treeNodeIdx, nodeFlags | selectedFlag, entityName.c_str(), "");
         ++m_treeNodeIdx;
         if (ImGui::IsItemClicked())
             onEntityClicked(owner);
@@ -227,7 +227,7 @@ void VoxelConeTracingGUI::subTree(const ComponentPtr<Transform>& transform)
     }
     else
     {
-        ImGui::TreeNodeEx((void*)(intptr_t)m_treeNodeIdx, nodeFlags | ImGuiTreeNodeFlags_Leaf | ImGuiTreeNodeFlags_NoTreePushOnOpen | selectedFlag, entityName.c_str());
+        ImGui::TreeNodeEx((void*)(intptr_t)m_treeNodeIdx, nodeFlags | ImGuiTreeNodeFlags_Leaf | ImGuiTreeNodeFlags_NoTreePushOnOpen | selectedFlag, entityName.c_str(), "");
         if (ImGui::IsItemClicked())
             onEntityClicked(owner);
 
@@ -262,7 +262,7 @@ void VoxelConeTracingGUI::guiShowFPS()
     ss << " Frame time: " << std::fixed << frameTime << "ms";
     ss << " Total time: " << int(Time::totalTime());
 
-    ImGui::Text(ss.str().c_str());
+    ImGui::TextUnformatted(ss.str().c_str());
 
     fpsCounter++;
     m_fpsWindow.end();
@@ -276,7 +276,7 @@ void VoxelConeTracingGUI::showComponents(const Entity& entity) const
 
     for (auto& component : components)
     {
-        if (ImGui::TreeNode((void*)(intptr_t)treeNodeIdx, component->getName().c_str()))
+        if (ImGui::TreeNode((void*)(intptr_t)treeNodeIdx, component->getName().c_str(), ""))
         {
             component->onShowInEditor();
             ImGui::TreePop();
@@ -349,7 +349,7 @@ void VoxelConeTracingGUI::showTextures(const ImVec2& canvasSize, std::initialize
             ImGui::SameLine();
 
         ImGui::BeginChild(tex.label.c_str(), panelSize);
-        ImGui::Text(tex.label.c_str());
+        ImGui::TextUnformatted(tex.label.c_str());
         ImGui::Image(ImTextureID(uintptr_t(tex.texID)), textureSize, ImVec2(0.0f, 1.0f), ImVec2(1.0f, 0.0f));
         ImGui::EndChild();
 

@@ -5,6 +5,7 @@
 #include <engine/rendering/shader/Shader.h>
 #include <functional>
 #include <memory>
+#include <engine/rendering/renderer/MeshRenderer.h>
 #include <engine/rendering/renderer/SimpleMeshRenderer.h>
 
 class Transform;
@@ -27,6 +28,7 @@ public:
     void renderAll();
 
 private:
+    ComponentPtr<CameraComponent> m_camera;
     Shader* m_instancedQuadShader;
     SimpleMeshRenderer* m_instancedQuadRenderer;
     std::vector<QuadInstanceData> m_quadInstanceData;
@@ -34,7 +36,6 @@ private:
     size_t m_quadInstanceIdx{0};
     float m_quadInstanceScale{1.0f};
 
-    ComponentPtr<CameraComponent> m_camera;
 };
 
 struct DebugRenderInfo

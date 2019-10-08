@@ -26,7 +26,7 @@ struct Frustum
             glm::vec3 farBottomRight;
             glm::vec3 farTopLeft;
             glm::vec3 farTopRight;
-        };
+        } data;
     };
 
     void transform(const glm::mat4& matrix);

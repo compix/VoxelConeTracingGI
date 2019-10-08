@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include <bitset>
+#include <limits>
 #include <assert.h>
 #include "ecs_settings.h"
 #include <engine/memory/Pool.h>

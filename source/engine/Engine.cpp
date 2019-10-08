@@ -4,7 +4,7 @@
 #include "input/Input.h"
 #include "camera/CameraComponent.h"
 #include "rendering/Screen.h"
-#include "ecs/ecs.h"
+#include "ecs/ECS.h"
 #include "imgui_impl/imgui_impl_sdl_gl3.h"
 #include <imgui/imgui.h>
 #include "rendering/util/Mipmapper.h"
