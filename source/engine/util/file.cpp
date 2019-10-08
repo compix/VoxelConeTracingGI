@@ -6,7 +6,6 @@
 #include <iostream>
 #include <GL/glew.h>
 #include <engine/resource/ResourceManager.h>
-#include <dirent.h>
 
 namespace file
 {
@@ -91,7 +90,8 @@ void file::forEachFileInDirectory(const std::string& directoryPath, bool recursi
     FindClose(dirHandle);
 }
 #else
-// TODO: Write unix version
+#include <dirent.h>
+
 void file::forEachFileInDirectory(const std::string& directoryPath, bool recursive, const file::DirectoryIterationFunction& fileFunc)
 {
     DIR *dir;

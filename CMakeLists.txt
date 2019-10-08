@@ -110,7 +110,9 @@ find_package(SDL2 REQUIRED)
 find_package(GLEW REQUIRED)
 find_package(OpenGL REQUIRED)
 
-find_package(PkgConfig REQUIRED)
+if (UNIX)
+    find_package(PkgConfig REQUIRED)
+endif ()
 
 add_definitions(${OpenGL_DEFINITIONS})
 include_directories(${SDL2_INCLUDE_DIR} ${OpenGL_INCLUDE_DIRS} ${GLEW_INCLUDE_DIR})

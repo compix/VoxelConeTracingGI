@@ -11,7 +11,9 @@
 
 // SDL,GL3W
 #include <SDL.h>
-// #include <SDL_syswm.h>
+#ifdef _WIN32
+#include <SDL_syswm.h>
+#endif
 #include <GL/glew.h>
 #include "engine/gui/GUI.h"
 
