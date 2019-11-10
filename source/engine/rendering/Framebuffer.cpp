@@ -173,11 +173,9 @@ void Framebuffer::setDrawBuffers()
     // Specify buffers into which outputs from frag shader will be written
     GLenum* drawBuffers = new GLenum[m_renderTextures.size()];
 
-    size_t i = 0;
     for (auto& p : m_renderTextures)
     {
-        drawBuffers[i] = p.first;
-        ++i;
+        drawBuffers[p.first - GL_COLOR_ATTACHMENT0] = p.first;
     }
 
     glDrawBuffers(GLsizei(m_renderTextures.size()), drawBuffers);
