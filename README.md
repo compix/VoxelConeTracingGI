@@ -11,6 +11,13 @@ Check out [Implementation-Overview.pdf](https://github.com/compix/VoxelConeTraci
 * Ambient Occlusion with VCT
 * Fully dynamic scenes
 
+## Build
+* CMake
+* Requirements: C++14 or later, OpenGL 4.4 or later
+* Supported (tested) Platforms:
+  * Windows 8 and 10 (compiled with Visual Studio 2015+)
+  * Ubuntu 18 (GCC 7.4.0, thanks to contributions of hchoi405)
+
 ## Issues
 * No coverage based voxelization (anti-aliasing voxelization)
   * Leads to discrete indirect illumination changes when objects move
