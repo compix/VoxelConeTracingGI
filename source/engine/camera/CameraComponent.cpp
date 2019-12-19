@@ -79,7 +79,7 @@ void CameraComponent::setViewport(float x, float y, float width, float height) n
     m_aspect = m_viewport.width() / m_viewport.height();
 
     if (m_perspective)
-        m_proj = glm::perspective(m_fovY, m_aspect, m_nearZ, m_farZ);
+        m_proj = glm::perspective(glm::radians(m_fovY), m_aspect, m_nearZ, m_farZ);
     else
         m_proj = glm::ortho(0.0f, 1.0f, 0.0f, 1.0f, m_nearZ, m_farZ);
 
