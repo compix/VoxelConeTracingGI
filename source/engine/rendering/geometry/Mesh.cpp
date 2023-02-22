@@ -6,6 +6,7 @@
 #include "GeometryGenerator.h"
 #include <engine/util/util.h>
 #include "MeshBuilder.h"
+#include <cstddef>
 
 Mesh::~Mesh()
 {
@@ -23,7 +24,7 @@ void Mesh::load(const MeshData& meshData)
     subMesh.uvs.resize(meshData.vertices.size());
     subMesh.indices = meshData.indices;
 
-    for (size_t i = 0; i < meshData.vertices.size(); ++i)
+    for (std::size_t i = 0; i < meshData.vertices.size(); ++i)
     {
         subMesh.vertices[i] = meshData.vertices[i].pos;
         subMesh.normals[i] = meshData.vertices[i].normal;
@@ -46,7 +47,7 @@ void Mesh::load(const MeshData& meshData, uint32_t vertexAttribFlags)
     subMesh.uvs.resize(meshData.vertices.size());
     subMesh.indices = meshData.indices;
 
-    for (size_t i = 0; i < meshData.vertices.size(); ++i)
+    for (std::size_t i = 0; i < meshData.vertices.size(); ++i)
     {
         auto& v = meshData.vertices[i];
 
@@ -125,7 +126,7 @@ void Mesh::finalize()
     freeGLResources();
 
     // Go through all submeshes and create ibos/vbos/vaos
-    for (size_t mi = 0; mi < m_subMeshes.size(); ++mi)
+    for (std::size_t mi = 0; mi < m_subMeshes.size(); ++mi)
     {
         auto& subMesh = m_subMeshes[mi];
         auto& renderData = m_subMeshRenderData[mi];
@@ -135,7 +136,7 @@ void Mesh::finalize()
             continue;
 
         // Interleave vertex data
-        for (size_t i = 0; i < subMesh.vertices.size(); ++i)
+        for (std::size_t i = 0; i < subMesh.vertices.size(); ++i)
         {
             vertices.push_back(subMesh.vertices[i].x);
             vertices.push_back(subMesh.vertices[i].y);
@@ -219,7 +220,7 @@ void Mesh::setSubMeshes(const std::vector<SubMesh>& subMeshes)
 
 glm::vec3 Mesh::computeCenter() const
 {
-    size_t count = 0;
+    std::size_t count = 0;
     glm::vec3 center;
     for (auto& subMesh : m_subMeshes)
     {
@@ -266,7 +267,7 @@ void Mesh::mapToUnitCube()
 
     for (auto& subMesh : m_subMeshes)
     {
-        for (size_t i = 0; i < subMesh.vertices.size(); ++i)
+        for (std::size_t i = 0; i < subMesh.vertices.size(); ++i)
         {
             subMesh.vertices[i] = (subMesh.vertices[i] + offset) * scaleInv;
         }

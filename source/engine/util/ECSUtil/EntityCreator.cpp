@@ -6,11 +6,12 @@
 #include "engine/rendering/lights/DirectionalLight.h"
 #include "engine/util/math.h"
 #include "engine/resource/ResourceManager.h"
+#include <cstddef>
 
-size_t EntityCreator::m_boxCounter = 0;
-size_t EntityCreator::m_cylinderCounter = 0;
-size_t EntityCreator::m_sphereCounter = 0;
-size_t EntityCreator::m_dirLightCounter = 0;
+std::size_t EntityCreator::m_boxCounter = 0;
+std::size_t EntityCreator::m_cylinderCounter = 0;
+std::size_t EntityCreator::m_sphereCounter = 0;
+std::size_t EntityCreator::m_dirLightCounter = 0;
 
 Entity EntityCreator::createBox(const std::string& name, const glm::vec3& pos, const glm::vec3& scale)
 {

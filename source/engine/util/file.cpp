@@ -6,6 +6,7 @@
 #include <iostream>
 #include <GL/glew.h>
 #include <engine/resource/ResourceManager.h>
+#include <cstddef>
 
 namespace file
 {
@@ -14,7 +15,7 @@ namespace file
 
     std::string Path::getExtension() const
     {
-        size_t dotPos = m_path.find_last_of('.');
+        std::size_t dotPos = m_path.find_last_of('.');
         if (dotPos < m_path.npos)
             return m_path.substr(dotPos);
 
@@ -23,7 +24,7 @@ namespace file
 
     std::string Path::getFilename() const
     {
-        size_t slashPos = m_path.find_last_of('/') + 1;
+        std::size_t slashPos = m_path.find_last_of('/') + 1;
         if (slashPos < m_path.npos)
             return m_path.substr(slashPos, m_path.find_last_of('.') - slashPos);
 
@@ -32,7 +33,7 @@ namespace file
 
     std::string Path::getFilenameWithExtension() const
     {
-        size_t slashPos = m_path.find_last_of('/') + 1;
+        std::size_t slashPos = m_path.find_last_of('/') + 1;
 
         if (slashPos < m_path.npos)
             return m_path.substr(m_path.find_last_of('/') + 1);
@@ -42,7 +43,7 @@ namespace file
 
     Path Path::getParent() const
     {
-        size_t slashPos = m_path.find_last_of('/');
+        std::size_t slashPos = m_path.find_last_of('/');
 
         if (slashPos < m_path.npos)
         {
@@ -115,24 +116,24 @@ void file::forEachFileInDirectory(const std::string& directoryPath, bool recursi
 }
 #endif
 
-file::ShaderSourceInfo resolveShaderIncludes(const std::string& shaderPath, const std::string& source, size_t lineStart)
+file::ShaderSourceInfo resolveShaderIncludes(const std::string& shaderPath, const std::string& source, std::size_t lineStart)
 {
     file::ShaderSourceInfo info(shaderPath, "");
     info.lineStart = lineStart;
 
     std::istringstream stream(source);
 
-    size_t lineNumber = lineStart;
+    std::size_t lineNumber = lineStart;
 
     std::string line;
     while (std::getline(stream, line))
     {
-        size_t incPos = line.find("#include");
+        std::size_t incPos = line.find("#include");
 
         if (incPos != line.npos)
         {
-            size_t p0 = line.find_first_of("\"", incPos);
-            size_t p1 = line.npos;
+            std::size_t p0 = line.find_first_of("\"", incPos);
+            std::size_t p1 = line.npos;
             if (p0 != line.npos)
                 p1 = line.find_first_of("\"", p0 + 1);
 
@@ -219,7 +220,7 @@ bool file::exists(const std::string& filename) noexcept
     return stat(filename.c_str(), &buffer) == 0;
 }
 
-size_t file::getSize(const std::string& filename)
+std::size_t file::getSize(const std::string& filename)
 {
     struct stat buffer;
     return stat(filename.c_str(), &buffer) == 0 ? buffer.st_size : 0;

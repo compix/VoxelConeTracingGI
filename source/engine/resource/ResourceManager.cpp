@@ -3,6 +3,7 @@
 #include <engine/rendering/Material.h>
 #include <engine/rendering/renderer/MeshRenderer.h>
 #include "engine/util/file.h"
+#include <cstddef>
 
 std::unordered_map<Texture2DKey, std::shared_ptr<Texture2D>> ResourceManager::m_textures2D;
 std::unordered_map<std::string, std::shared_ptr<MeshRenderer>> ResourceManager::m_meshRenderers;
@@ -26,7 +27,7 @@ std::shared_ptr<Texture2D> ResourceManager::getTexture(const std::string& path, 
 void ResourceManager::setTextures(const std::string& textureName, const std::string& baseTexturePath,
     const std::vector<std::string>& texturePaths, Material* material, Texture2DSettings settings)
 {
-    for (size_t i = 0; i < texturePaths.size(); ++i)
+    for (std::size_t i = 0; i < texturePaths.size(); ++i)
     {
         auto texture = getTexture(baseTexturePath + texturePaths[i], settings);
 
@@ -53,7 +54,7 @@ std::shared_ptr<MeshRenderer> ResourceManager::getMeshRenderer(const std::string
 
     std::vector<MaterialDescription> materialDescs = model->getAllMaterials();
 
-    for (size_t i = 0; i < materialDescs.size(); ++i)
+    for (std::size_t i = 0; i < materialDescs.size(); ++i)
     {
         auto material = std::make_shared<Material>(shader);
         auto& materialDesc = materialDescs[i];
@@ -145,7 +146,7 @@ void ResourceManager::setShaderIncludePath(const std::string& path)
         return;
     }
 
-    size_t pathLength = fullPath.length();
+    std::size_t pathLength = fullPath.length();
 
     file::forEachFileInDirectory(fullPath, true, [pathLength](const std::string& directoryPath, const std::string& filename, bool isDirectory) 
     {

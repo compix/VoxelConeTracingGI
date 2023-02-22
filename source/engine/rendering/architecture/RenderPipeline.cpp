@@ -1,5 +1,6 @@
 #include "RenderPipeline.h"
 #include "engine/util/QueryManager.h"
+#include <cstddef>
 
 RenderPipeline::RenderPipeline(ComponentPtr<CameraComponent> camera)
     : m_camera(camera) {}
@@ -10,7 +11,7 @@ RenderPipeline::~RenderPipeline()
         p.second.free();
 }
 
-std::shared_ptr<RenderPass> RenderPipeline::getRenderPass(const std::string& name, size_t idx)
+std::shared_ptr<RenderPass> RenderPipeline::getRenderPass(const std::string& name, std::size_t idx)
 {
     auto it = m_renderPassesMap.find(name);
     if (it == m_renderPassesMap.end())

@@ -1,6 +1,7 @@
 #include "QueryManager.h"
 #include "Logger.h"
 #include <algorithm>
+#include <cstddef>
 
 QueryManager::ElapsedTimeMap QueryManager::m_gpuElapsedTime;
 QueryManager::ElapsedTimeMap QueryManager::m_cpuElapsedTime;
@@ -170,7 +171,7 @@ struct InternalElapsedTimeInfoCPU : InternalElapsedTimeInfo
 
 uint64_t ElapsedTimeInfo::getAverageInMicroseconds(uint64_t intervalInMilliseconds) const
 {
-    if (m_curEntry < 0 || m_elapsedTimeHistory.size() <= static_cast<size_t>(m_curEntry))
+    if (m_curEntry < 0 || m_elapsedTimeHistory.size() <= static_cast<std::size_t>(m_curEntry))
         return 0;
 
     uint64_t firstTimeStamp = m_elapsedTimeHistory[m_curEntry].timestampInMilliseconds;
@@ -189,7 +190,7 @@ uint64_t ElapsedTimeInfo::getAverageInMicroseconds(uint64_t intervalInMillisecon
 
 uint64_t ElapsedTimeInfo::getMaxInMicroseconds(uint64_t intervalInMilliseconds) const
 {
-    if (m_curEntry < 0 || m_elapsedTimeHistory.size() <= static_cast<size_t>(m_curEntry))
+    if (m_curEntry < 0 || m_elapsedTimeHistory.size() <= static_cast<std::size_t>(m_curEntry))
         return 0;
 
     uint64_t firstTimeStamp = m_elapsedTimeHistory[m_curEntry].timestampInMilliseconds;
@@ -213,7 +214,7 @@ std::vector<ElapsedTimeInfo::Entry> ElapsedTimeInfo::getHistory(int start, int e
 {
     assert(start <= end);
 
-    if (m_curEntry < 0 || m_elapsedTimeHistory.size() <= static_cast<size_t>(m_curEntry))
+    if (m_curEntry < 0 || m_elapsedTimeHistory.size() <= static_cast<std::size_t>(m_curEntry))
         return std::vector<Entry>();
 
     start = std::max(start, -int(m_historySize));

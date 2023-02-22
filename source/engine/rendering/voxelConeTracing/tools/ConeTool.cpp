@@ -8,6 +8,7 @@
 #include <engine/rendering/Screen.h>
 #include <engine/input/Input.h>
 #include "engine/rendering/voxelConeTracing/Globals.h"
+#include <cstddef>
 
 std::vector<glm::vec3> getSpherePoints(const std::string& spherePoints, const std::string& filePath)
 {
@@ -17,7 +18,7 @@ std::vector<glm::vec3> getSpherePoints(const std::string& spherePoints, const st
 
     try
     {
-        for (size_t i = 0; i < spherePointsVec.size(); i += 3)
+        for (std::size_t i = 0; i < spherePointsVec.size(); i += 3)
         {
             float x = std::stof(spherePointsVec[i]);
             float y = std::stof(spherePointsVec[i + 1]);
@@ -135,7 +136,7 @@ void ConeTool::generateHemisphereCones()
 
     glm::vec3 axis = MAIN_AXES[m_axisIdx];
 
-    for (size_t i = 0; i < m_loadedSpherePoints.size(); ++i)
+    for (std::size_t i = 0; i < m_loadedSpherePoints.size(); ++i)
     {
         glm::vec3 direction = glm::normalize(m_loadedSpherePoints[i]);
 
@@ -165,7 +166,7 @@ void ConeTool::generateGLSLCodeForDirections(const glm::vec3& normal, const std:
 
     // Save the floats:
     stream << "// Sphere points as floats: \n";
-    for (size_t i = 0; i < directions.size(); ++i)
+    for (std::size_t i = 0; i < directions.size(); ++i)
     {
         glm::vec3 d = directions[i];
         stream << d.x << "\n";
@@ -179,7 +180,7 @@ void ConeTool::generateGLSLCodeForDirections(const glm::vec3& normal, const std:
     stream << "const float DIFFUSE_CONE_APERTURE = " << math::toRadians(m_coneAngleDeg) << ";\n\n";
     stream << "const vec3 DIFFUSE_CONE_DIRECTIONS[" << directions.size() << "] = {\n";
 
-    for (size_t i = 0; i < directions.size(); ++i)
+    for (std::size_t i = 0; i < directions.size(); ++i)
     {
         glm::vec3 d = directions[i];
         stream << "    vec3(" << d.x << ", " << d.y << ", " << d.z << ")" << (i + 1 < directions.size() ? ",\n" : "\n");

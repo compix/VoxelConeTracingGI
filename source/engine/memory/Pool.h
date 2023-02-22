@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include <assert.h>
+#include <cstddef>
 
 /**
 * Pool consisting of multiple contiguous blocks of a defined number of contiguous elements which are of a predefined size.
@@ -9,11 +10,11 @@
 class BasePool
 {
 public:
-    BasePool(size_t elemSize, size_t blockCapacity, size_t initialPoolCapacity);
+    BasePool(std::size_t elemSize, std::size_t blockCapacity, std::size_t initialPoolCapacity);
 
     virtual ~BasePool();
 
-    void resize(size_t size)
+    void resize(std::size_t size)
     {
         if (m_size < size)
         {
@@ -30,7 +31,7 @@ public:
     * It might have to reserve more than requested because pool capacity depends on
     * the block capacity.
     */
-    void reserve(size_t capacity)
+    void reserve(std::size_t capacity)
     {
         while (m_capacity < capacity)
         {
@@ -41,41 +42,41 @@ public:
         }
     }
 
-    void* get(size_t idx)
+    void* get(std::size_t idx)
     {
         assert(idx < m_size);
         // Get pointer to the corresponding block first and then add the relative offset
         return m_blocks[idx / m_blockCapacity] + m_elemSize * (idx % m_blockCapacity);
     }
 
-    const void* get(size_t idx) const
+    const void* get(std::size_t idx) const
     {
         assert(idx < m_size);
         // Get pointer to the corresponding block first and then add the relative offset
         return m_blocks[idx / m_blockCapacity] + m_elemSize * (idx % m_blockCapacity);
     }
 
-    void* operator[](size_t idx) { return get(idx); }
+    void* operator[](std::size_t idx) { return get(idx); }
 
-    const void* operator[](size_t idx) const { return get(idx); }
+    const void* operator[](std::size_t idx) const { return get(idx); }
 
-    size_t size() const { return m_size; }
+    std::size_t size() const { return m_size; }
 
-    size_t capacity() const { return m_capacity; }
+    std::size_t capacity() const { return m_capacity; }
 
     bool empty() const { return m_size == 0; }
 
-    virtual void destroy(size_t idx) = 0;
+    virtual void destroy(std::size_t idx) = 0;
 
 protected:
     std::vector<char*> m_blocks; // Vector of all contiguous memory blocks
-    const size_t m_elemSize; // Size in bytes of one element
-    const size_t m_blockCapacity; // Number of elements per block
-    size_t m_size; // Number of elements in the pool
-    size_t m_capacity; // How many elements can fit into the pool
+    const std::size_t m_elemSize; // Size in bytes of one element
+    const std::size_t m_blockCapacity; // Number of elements per block
+    std::size_t m_size; // Number of elements in the pool
+    std::size_t m_capacity; // How many elements can fit into the pool
 };
 
-template <class T, size_t BlockCapacity = 8192, size_t InitialCapacity = 0>
+template <class T, std::size_t BlockCapacity = 8192, std::size_t InitialCapacity = 0>
 class Pool : public BasePool
 {
 public:
@@ -84,7 +85,7 @@ public:
     /**
     * Calls the destructor of the specified element.
     */
-    void destroy(size_t idx) override
+    void destroy(std::size_t idx) override
     {
         assert(idx < m_size);
         // The destructor needs to be called explicitly because placement new is used
@@ -96,17 +97,17 @@ public:
     * args are the constructor parameters for the class of the pool
     */
     template <class ... Args>
-    T* create(size_t idx, Args&& ... args)
+    T* create(std::size_t idx, Args&& ... args)
     {
         // Placement new into the pool
         return new(get(idx)) T(std::forward<Args>(args) ...);
     }
 
-    T& getRef(size_t idx) { return *static_cast<T*>(get(idx)); }
+    T& getRef(std::size_t idx) { return *static_cast<T*>(get(idx)); }
 
-    const T& getRef(size_t idx) const { return *static_cast<T*>(get(idx)); }
+    const T& getRef(std::size_t idx) const { return *static_cast<T*>(get(idx)); }
 
-    T* getPtr(size_t idx) { return static_cast<T*>(get(idx)); }
+    T* getPtr(std::size_t idx) { return static_cast<T*>(get(idx)); }
 
-    const T* getPtr(size_t idx) const { return static_cast<T*>(get(idx)); }
+    const T* getPtr(std::size_t idx) const { return static_cast<T*>(get(idx)); }
 };

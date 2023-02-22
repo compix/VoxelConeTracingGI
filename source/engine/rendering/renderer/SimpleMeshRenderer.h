@@ -1,6 +1,7 @@
 #pragma once
 #include <GL/glew.h>
 #include <vector>
+#include <cstddef>
 
 class MeshBuilder;
 
@@ -18,15 +19,15 @@ public:
     void bindAndRender() const;
     void bindAndRenderInstanced(GLsizei instanceCount) const;
 
-    GLuint getVBO(size_t idx) const { return m_vbos[idx]; }
+    GLuint getVBO(std::size_t idx) const { return m_vbos[idx]; }
 
 private:
     std::vector<GLuint> m_vbos;
     GLuint m_ibo{0};
     GLuint m_vao{0};
 
-    size_t m_indexCount{0};
-    size_t m_vertexCount{0};
+    std::size_t m_indexCount{0};
+    std::size_t m_vertexCount{0};
     GLenum m_renderMode{0};
     GLenum m_indexType{0};
 };

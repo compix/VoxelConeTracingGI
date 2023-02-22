@@ -3,6 +3,7 @@
 #include <engine/geometry/Transform.h>
 #include <engine/rendering/geometry/Mesh.h>
 #include <memory>
+#include <cstddef>
 
 struct MaterialDescription
 {
@@ -24,7 +25,7 @@ struct Model
     void addChild(std::shared_ptr<Model> model);
     std::vector<Mesh::SubMesh> getAllSubMeshes() const;
     std::vector<MaterialDescription> getAllMaterials() const;
-    size_t getTriangleCount() const;
+    std::size_t getTriangleCount() const;
 
     // Members
     std::string name;

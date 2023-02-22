@@ -13,6 +13,7 @@
 #include "Downsampler.h"
 #include "engine/util/QueryManager.h"
 #include "VoxelConeTracing.h"
+#include <cstddef>
 
 VoxelizationPass::VoxelizationPass()
     : RenderPass("VoxelizationPass")
@@ -29,7 +30,7 @@ void VoxelizationPass::init(float extentWorldLevel0)
     int halfExtent = extent / 2;
 
     // Define clip regions centered around the origin (0, 0, 0) in voxel coordinates
-    for (size_t i = 0; i < m_clipRegions.size(); ++i)
+    for (std::size_t i = 0; i < m_clipRegions.size(); ++i)
     {
         m_clipRegions[i].minPos = glm::ivec3(-halfExtent);
         m_clipRegions[i].extent = glm::ivec3(extent);
@@ -243,14 +244,14 @@ void VoxelizationPass::computeRevoxelizationRegionsDynamicEntities()
     markedPortions.resize(m_portionsOfDynamicEntities.size(), false);
 
     // Unite overlapping portions
-    for (size_t i = 0; i < m_portionsOfDynamicEntities.size(); ++i)
+    for (std::size_t i = 0; i < m_portionsOfDynamicEntities.size(); ++i)
     {
         if (markedPortions[i])
             continue;
 
         BBox& a = m_portionsOfDynamicEntities[i];
 
-        size_t j = i + 1;
+        std::size_t j = i + 1;
         while (j < m_portionsOfDynamicEntities.size())
         {
             BBox& b = m_portionsOfDynamicEntities[j];
@@ -273,7 +274,7 @@ void VoxelizationPass::computeRevoxelizationRegionsDynamicEntities()
     }
 
     // Compute the correct regions for each clip region and add for revoxelization
-    for (size_t j = 0; j < m_portionsOfDynamicEntities.size(); ++j)
+    for (std::size_t j = 0; j < m_portionsOfDynamicEntities.size(); ++j)
     {
         const BBox& portion = m_portionsOfDynamicEntities[j];
 

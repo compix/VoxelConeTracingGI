@@ -7,6 +7,7 @@
 #include <memory>
 #include <engine/rendering/renderer/MeshRenderer.h>
 #include <engine/rendering/renderer/SimpleMeshRenderer.h>
+#include <cstddef>
 
 class Transform;
 class GLShaderManager;
@@ -32,8 +33,8 @@ private:
     Shader* m_instancedQuadShader;
     SimpleMeshRenderer* m_instancedQuadRenderer;
     std::vector<QuadInstanceData> m_quadInstanceData;
-    size_t m_maxQuadInstances{1000000};
-    size_t m_quadInstanceIdx{0};
+    std::size_t m_maxQuadInstances{1000000};
+    std::size_t m_quadInstanceIdx{0};
     float m_quadInstanceScale{1.0f};
 
 };
@@ -118,7 +119,7 @@ public:
 
     static void loadInstancedQuad();
 
-    static void setMaxQuadInstanced(size_t size) { m_maxQuadInstances = size; }
+    static void setMaxQuadInstanced(std::size_t size) { m_maxQuadInstances = size; }
 
 private:
     static void setViewProj(const glm::mat4& view, const glm::mat4& proj)
@@ -154,8 +155,8 @@ private:
     static std::shared_ptr<Shader> m_instancedQuadShader;
     static std::unique_ptr<SimpleMeshRenderer> m_instancedQuadRenderer;
     static std::vector<QuadInstanceData> m_quadInstanceData;
-    static size_t m_maxQuadInstances;
-    static size_t m_quadInstanceIdx;
+    static std::size_t m_maxQuadInstances;
+    static std::size_t m_quadInstanceIdx;
     static float m_quadInstanceScale;
 
     static std::vector<DebugRenderInfo> m_debugRenderInfoStack;

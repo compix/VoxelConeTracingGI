@@ -25,6 +25,7 @@
 #include "engine/util/commands/CommandChain.h"
 #include "engine/util/QueryManager.h"
 #include "engine/rendering/renderer/MeshRenderers.h"
+#include <cstddef>
 
 VoxelConeTracingDemo::VoxelConeTracingDemo()
 {
@@ -223,7 +224,7 @@ void VoxelConeTracingDemo::init3DVoxelTextures()
     GL_ERROR_CHECK();
 }
 
-BBox VoxelConeTracingDemo::getBBox(size_t clipmapLevel) const
+BBox VoxelConeTracingDemo::getBBox(std::size_t clipmapLevel) const
 {
     glm::vec3 center = MainCamera->getPosition();
     float halfSize = 0.5f * m_clipRegionBBoxExtentL0 * std::exp2f(float(clipmapLevel));
@@ -285,7 +286,7 @@ void VoxelConeTracingDemo::animateDirLight()
 void VoxelConeTracingDemo::updateCameraClipRegions()
 {
     m_clipRegionBBoxes.clear();
-    for (size_t i = 0; i < CLIP_REGION_COUNT; ++i)
+    for (std::size_t i = 0; i < CLIP_REGION_COUNT; ++i)
         m_clipRegionBBoxes.push_back(getBBox(i));
 }
 

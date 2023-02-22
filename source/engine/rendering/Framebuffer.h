@@ -5,6 +5,7 @@
 #include <vector>
 #include "Texture2D.h"
 #include <unordered_map>
+#include <cstddef>
 
 class Framebuffer
 {
@@ -37,9 +38,9 @@ public:
 
     GLuint getDepthTexture(uint32_t idx = 0) const noexcept { return *m_depthTextures[idx]; }
 
-    size_t getRenderTextureCount() const noexcept { return m_renderTextures.size(); }
+    std::size_t getRenderTextureCount() const noexcept { return m_renderTextures.size(); }
 
-    size_t getDepthBufferCount() const { return m_depthTextures.size(); }
+    std::size_t getDepthBufferCount() const { return m_depthTextures.size(); }
 
     void resize(GLsizei width, GLsizei height);
 

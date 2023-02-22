@@ -6,6 +6,7 @@
 #include "Timer.h"
 #include <memory>
 #include "Logger.h"
+#include <cstddef>
 
 // Multiple buffers are used because querying can stall
 #define MAX_QUERY_OBJECT_BUFFERS 3
@@ -76,12 +77,12 @@ struct ElapsedTimeInfoBag
 
     ElapsedTimeInfo& operator[](ElapsedTimeInfoType type)
     {
-        return info[size_t(type)];
+        return info[std::size_t(type)];
     }
 
     const ElapsedTimeInfo& operator[](ElapsedTimeInfoType type) const
     {
-        return info[size_t(type)];
+        return info[std::size_t(type)];
     }
 };
 

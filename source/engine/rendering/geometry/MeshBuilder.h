@@ -2,6 +2,7 @@
 #include <GL/glew.h>
 #include <vector>
 #include <engine/util/Logger.h>
+#include <cstddef>
 
 class VBODescription
 {
@@ -17,7 +18,7 @@ class VBODescription
         Attr(GLint size, GLenum type, GLuint divisor, GLboolean normalized)
             : size(size), type(type), divisor(divisor), normalized(normalized), offset(nullptr) { }
 
-        Attr(GLint size, GLenum type, GLuint divisor, GLboolean normalized, const void* offset, size_t stride)
+        Attr(GLint size, GLenum type, GLuint divisor, GLboolean normalized, const void* offset, std::size_t stride)
             : size(size), type(type), divisor(divisor), normalized(normalized), offset(offset), stride(stride) { }
 
         GLint size{0};
@@ -25,7 +26,7 @@ class VBODescription
         GLuint divisor{0};
         GLboolean normalized{false};
         const void* offset;
-        size_t stride{0};
+        std::size_t stride{0};
     };
 
 public:
@@ -33,7 +34,7 @@ public:
     * Creates a vertex buffer object with the given size and a pointer to the data.
     * Usage is defined to be GL_STATIC_DRAW by default.
     */
-    VBODescription(size_t size, const void* data, GLenum usage = GL_STATIC_DRAW);
+    VBODescription(std::size_t size, const void* data, GLenum usage = GL_STATIC_DRAW);
 
     /**
     * Specify the next vertex attribute - offsets and stride will be deduced when finalize() is called.
@@ -51,7 +52,7 @@ public:
 private:
     bool m_deducedOffset{true};
 
-    size_t m_size{0};
+    std::size_t m_size{0};
     const void* m_data;
     GLenum m_usage;
     std::vector<Attr> m_attributes;
@@ -60,7 +61,7 @@ private:
 class MeshBuilder
 {
 public:
-    explicit MeshBuilder(size_t vertexCount);
+    explicit MeshBuilder(std::size_t vertexCount);
 
     void reset();
 
@@ -76,7 +77,7 @@ public:
     * The type of the indicies is defined to be GL_UNSIGNED_INT by default.
     * Usage is defined to be GL_STATIC_DRAW by default.
     */
-    MeshBuilder& createIBO(size_t indexCount, const void* data, GLenum indexType = GL_UNSIGNED_INT, GLenum usage = GL_STATIC_DRAW);
+    MeshBuilder& createIBO(std::size_t indexCount, const void* data, GLenum indexType = GL_UNSIGNED_INT, GLenum usage = GL_STATIC_DRAW);
 
     /**
     * Creates a vertex array object and binds attributes.
@@ -85,15 +86,15 @@ public:
 
     std::vector<GLuint> getVBOs() const { return m_vbos; }
 
-    GLuint getVBO(size_t idx) const { return m_vbos[idx]; }
+    GLuint getVBO(std::size_t idx) const { return m_vbos[idx]; }
 
     GLuint getIBO() const { return m_ibo; }
 
     GLuint getVAO() const { return m_vao; }
 
-    size_t getIndexCount() const { return m_indexCount; }
+    std::size_t getIndexCount() const { return m_indexCount; }
 
-    size_t getVertexCount() const { return m_vertexCount; }
+    std::size_t getVertexCount() const { return m_vertexCount; }
 
     GLenum getIndexType() const { return m_indexType; }
 
@@ -104,6 +105,6 @@ private:
     GLuint m_vao{0};
 
     GLenum m_indexType{0};
-    size_t m_indexCount{0};
-    size_t m_vertexCount{0};
+    std::size_t m_indexCount{0};
+    std::size_t m_vertexCount{0};
 };

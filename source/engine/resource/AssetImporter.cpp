@@ -8,6 +8,7 @@
 #include <assimp/cimport.h>
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
+#include <cstddef>
 
 std::shared_ptr<Model> AssetImporter::import(const std::string& filename)
 {
@@ -38,7 +39,7 @@ void addTextures(unsigned type, aiMaterial* material, std::vector<std::string>& 
         std::string texture = texString.C_Str();
         std::vector<std::string> splitted = util::split(texture, "\\");
         texture = "";
-        for (size_t j = 0; j < splitted.size(); ++j)
+        for (std::size_t j = 0; j < splitted.size(); ++j)
             texture += splitted[j] + (j + 1 < splitted.size() ? "/" : "");
 
         textures.push_back(texture);

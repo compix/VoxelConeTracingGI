@@ -1,6 +1,7 @@
 #pragma once
 #include <GL/glew.h>
 #include <glm/glm.hpp>
+#include <cstddef>
 
 namespace convert
 {
@@ -28,5 +29,5 @@ namespace convert
     template <>
     constexpr GLenum toGLEnum<uint32_t>() { return GL_UNSIGNED_INT; }
 
-    size_t sizeFromGLType(GLenum type);
+    std::size_t sizeFromGLType(GLenum type);
 }

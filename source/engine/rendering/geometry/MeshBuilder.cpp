@@ -2,8 +2,9 @@
 #include <assert.h>
 #include <engine/util/Logger.h>
 #include <engine/util/convert.h>
+#include <cstddef>
 
-VBODescription::VBODescription(size_t size, const void* data, GLenum usage)
+VBODescription::VBODescription(std::size_t size, const void* data, GLenum usage)
     : m_size(size), m_data(data), m_usage(usage) {}
 
 VBODescription& VBODescription::attribute(GLint size, GLenum type, GLuint attribDivisor, GLboolean normalized)
@@ -24,7 +25,7 @@ VBODescription& VBODescription::attribute(GLint size, GLenum type, const void* o
     return *this;
 }
 
-MeshBuilder::MeshBuilder(size_t vertexCount)
+MeshBuilder::MeshBuilder(std::size_t vertexCount)
     : m_vertexCount(vertexCount) {}
 
 void MeshBuilder::reset()
@@ -44,7 +45,7 @@ MeshBuilder& MeshBuilder::createVBO(VBODescription& vboDescription)
     return *this;
 }
 
-MeshBuilder& MeshBuilder::createIBO(size_t indexCount, const void* data, GLenum indexType, GLenum usage)
+MeshBuilder& MeshBuilder::createIBO(std::size_t indexCount, const void* data, GLenum indexType, GLenum usage)
 {
     m_indexType = indexType;
     m_indexCount = indexCount;
@@ -64,17 +65,17 @@ void MeshBuilder::finalize()
 
     GLuint idx = 0;
 
-    for (size_t i = 0; i < m_vboDescriptions.size(); ++i)
+    for (std::size_t i = 0; i < m_vboDescriptions.size(); ++i)
     {
         auto& vboDesc = m_vboDescriptions[i];
         glBindBuffer(GL_ARRAY_BUFFER, m_vbos[i]);
 
-        size_t stride = 0;
+        std::size_t stride = 0;
         if (vboDesc.m_deducedOffset) // Compute stride
             for (auto& attr : vboDesc.m_attributes)
                 stride += attr.size * convert::sizeFromGLType(attr.type);
 
-        size_t offset = 0;
+        std::size_t offset = 0;
 
         // Bind attributes
         for (auto& attr : vboDesc.m_attributes)

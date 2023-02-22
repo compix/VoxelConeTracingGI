@@ -2,11 +2,12 @@
 #include <GL/gl.h>
 #include <engine/util/Logger.h>
 #include <engine/rendering/debug/DebugRenderer.h>
+#include <cstddef>
 
 void MeshData::computeBitangets()
 {
     // Compute bitangets
-    for (size_t i = 0; i < vertices.size(); ++i)
+    for (std::size_t i = 0; i < vertices.size(); ++i)
         vertices[i].bitanget = glm::cross(vertices[i].normal, vertices[i].tangent);
 }
 
@@ -260,7 +261,7 @@ MeshData GeometryGenerator::createArrowHead()
 
     float tl = sinf(math::PI_DIV_4);
 
-    for (size_t i = 0; i < circleVertexNum; ++i)
+    for (std::size_t i = 0; i < circleVertexNum; ++i)
     {
         float angle = angleStep * i;
         float c = cosf(angle);
@@ -279,7 +280,7 @@ MeshData GeometryGenerator::createArrowHead()
     // Define indices
     // Cone/Arrow upper mesh
     GLuint vi = 0;
-    for (size_t i = 0; i < trianglesNum / 2; ++i)
+    for (std::size_t i = 0; i < trianglesNum / 2; ++i)
     {
         meshData.indices[i * 3] = vi;
         meshData.indices[i * 3 + 1] = circleStart + vi;
@@ -289,7 +290,7 @@ MeshData GeometryGenerator::createArrowHead()
 
     // Circle
     vi = 0;
-    for (size_t i = trianglesNum / 2; i < trianglesNum; ++i)
+    for (std::size_t i = trianglesNum / 2; i < trianglesNum; ++i)
     {
         meshData.indices[i * 3] = vertexNum - 1;
         meshData.indices[i * 3 + 2] = circleStart2 + vi;
@@ -326,7 +327,7 @@ MeshData GeometryGenerator::createCylinder()
     GLuint lowerBaseStart = upperCircleStart + circleVertexNum;
     GLuint upperBaseStart = lowerBaseStart + circleVertexNum;
 
-    for (size_t i = 0; i < circleVertexNum; ++i)
+    for (std::size_t i = 0; i < circleVertexNum; ++i)
     {
         float angle = angleStep * i;
         float c = cosf(angle);
@@ -345,7 +346,7 @@ MeshData GeometryGenerator::createCylinder()
 
     // Lower Circle
     GLuint vi = 0;
-    for (size_t i = 0; i < circleVertexNum - 1; ++i)
+    for (std::size_t i = 0; i < circleVertexNum - 1; ++i)
     {
         meshData.indices[i * 3] = vertexNum - 2;
         meshData.indices[i * 3 + 2] = lowerCircleStart + vi;
@@ -355,7 +356,7 @@ MeshData GeometryGenerator::createCylinder()
 
     // Upper circle
     vi = 0;
-    for (size_t i = circleVertexNum - 1; i < (circleVertexNum - 1) * 2; ++i)
+    for (std::size_t i = circleVertexNum - 1; i < (circleVertexNum - 1) * 2; ++i)
     {
         meshData.indices[i * 3] = vertexNum - 1;
         meshData.indices[i * 3 + 2] = upperCircleStart + vi;
@@ -365,7 +366,7 @@ MeshData GeometryGenerator::createCylinder()
 
     // Base
     vi = 0;
-    for (size_t i = (circleVertexNum - 1) * 2; i < trianglesNum; i += 2)
+    for (std::size_t i = (circleVertexNum - 1) * 2; i < trianglesNum; i += 2)
     {
         GLuint v0 = upperBaseStart + vi;
         GLuint v1 = lowerBaseStart + vi;

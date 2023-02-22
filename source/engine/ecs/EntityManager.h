@@ -6,6 +6,7 @@
 #include "ecs_settings.h"
 #include <engine/memory/Pool.h>
 #include <unordered_map>
+#include <cstddef>
 
 /*
 ~~~~~ Features ~~~~~
@@ -165,7 +166,7 @@ class ComponentPtr<Component>
 public:
     ComponentPtr() { }
 
-    explicit ComponentPtr(const Entity& owner, size_t typeID);
+    explicit ComponentPtr(const Entity& owner, std::size_t typeID);
 
     bool operator ==(const ComponentPtr<Component>& other) const { return m_owner == other.m_owner && m_typeID == other.m_typeID; }
 
@@ -182,7 +183,7 @@ public:
 
 private:
     Entity m_owner;
-    size_t m_typeID{std::numeric_limits<size_t>().max()};
+    std::size_t m_typeID{std::numeric_limits<std::size_t>().max()};
 
     // Allows to see the contents of the component when debugging
     // Note: This can potentially have incorrect values after 
@@ -338,7 +339,7 @@ public:
     template <class C>
     void removeComponent(const Entity& entity);
 
-    void removeComponent(const Entity& entity, size_t componentTypeID);
+    void removeComponent(const Entity& entity, std::size_t componentTypeID);
 
     template <class C>
     bool hasComponent(const Entity& entity) const;
@@ -363,10 +364,10 @@ public:
     template <class... Components>
     EntityID numberOfEntitiesWithComponents(bool includeInactive = true);
 private:
-    bool hasComponent(const Entity& entity, size_t componentTypeID) const;
+    bool hasComponent(const Entity& entity, std::size_t componentTypeID) const;
 
-    const Component* getComponentPtr(const Entity& entity, size_t componentTypeID) const;
-    Component* getComponentPtr(const Entity& entity, size_t componentTypeID);
+    const Component* getComponentPtr(const Entity& entity, std::size_t componentTypeID) const;
+    Component* getComponentPtr(const Entity& entity, std::size_t componentTypeID);
 
     EntityID capacity() const { return EntityID(m_versions.size()); }
 
@@ -379,12 +380,12 @@ private:
     template <class C>
     Pool<C>* getPool();
 
-    Pool<Component>* getPool(size_t componentTypeID);
+    Pool<Component>* getPool(std::size_t componentTypeID);
 
     template <class C>
     const Pool<const C>* getPool() const;
 
-    const Pool<const Component>* getPool(size_t componentTypeID) const;
+    const Pool<const Component>* getPool(std::size_t componentTypeID) const;
 
     // Used to assign an id to each component type local to the EntityManager.
     // Starting at 0 and increasing by 1. It's used as an index into a container.
@@ -405,7 +406,7 @@ private:
     std::vector<std::string> m_names;
     EntityVersions m_versions;
     EntityIDManager m_idManager;
-    size_t m_totalEntityCounter{0}; // Increases when a new entity is added but never decreases
+    std::size_t m_totalEntityCounter{0}; // Increases when a new entity is added but never decreases
 };
 
 template <class C, class ... Args>

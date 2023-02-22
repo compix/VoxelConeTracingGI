@@ -1,12 +1,13 @@
 #include "MeshRenderer.h"
 #include <imgui/imgui.h>
+#include <cstddef>
 
 MeshRenderer::MeshRenderer(std::shared_ptr<Mesh> mesh)
     : m_mesh(mesh) {}
 
 void MeshRenderer::onShowInEditor()
 {
-    for (size_t i = 0; i < m_materials.size(); ++i)
+    for (std::size_t i = 0; i < m_materials.size(); ++i)
     {
         std::string materialName = "Material" + std::to_string(i);
         auto& material = m_materials[i];

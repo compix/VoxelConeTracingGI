@@ -1,6 +1,7 @@
 #include "util.h"
 #include <engine/rendering/geometry/Mesh.h>
 #include <iterator>
+#include <cstddef>
 
 BBox util::computeBBox(const Mesh& mesh)
 {
@@ -16,8 +17,8 @@ BBox util::computeBBox(const Mesh& mesh)
 std::vector<std::string> util::split(const std::string& s, const std::string& delimiter)
 {
     std::vector<std::string> strings;
-    size_t last = 0;
-    size_t next = 0;
+    std::size_t last = 0;
+    std::size_t next = 0;
     while ((next = s.find(delimiter, last)) != std::string::npos)
     {
         std::string sub = s.substr(last, next - last);

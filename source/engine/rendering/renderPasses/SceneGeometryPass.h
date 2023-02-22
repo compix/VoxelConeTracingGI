@@ -3,6 +3,7 @@
 #include <engine/rendering/Framebuffer.h>
 #include <engine/rendering/architecture/RenderPass.h>
 #include "engine/input/Input.h"
+#include <cstddef>
 
 class MeshRenderer;
 
@@ -17,7 +18,7 @@ public:
 
     GLuint getRenderTexture(GLenum colorAttachment = GL_COLOR_ATTACHMENT0) const noexcept { return m_framebuffer->getRenderTexture(colorAttachment); }
     GLuint getDepthTexture() const noexcept { return m_framebuffer->getDepthTexture(); }
-    size_t getRenderTextureCount() const noexcept { return m_framebuffer->getRenderTextureCount(); }
+    std::size_t getRenderTextureCount() const noexcept { return m_framebuffer->getRenderTextureCount(); }
 
     void update() override;
 

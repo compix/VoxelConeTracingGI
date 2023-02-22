@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include <functional>
+#include <cstddef>
 
 namespace file
 {
@@ -19,7 +20,7 @@ namespace file
         /**
         * Returns info for the provided lineNumber.
         */
-        const ShaderSourceInfo& getInfo(size_t lineNumber) const
+        const ShaderSourceInfo& getInfo(std::size_t lineNumber) const
         {
             for (auto& c : children)
                 if (c.isLinePartOf(lineNumber))
@@ -28,12 +29,12 @@ namespace file
             return *this;
         }
 
-        bool isLinePartOf(size_t lineNumber) const { return lineNumber >= lineStart && lineNumber <= lineEnd; }
+        bool isLinePartOf(std::size_t lineNumber) const { return lineNumber >= lineStart && lineNumber <= lineEnd; }
 
-        size_t getRelativeLineNumber(size_t lineNumber) const
+        std::size_t getRelativeLineNumber(std::size_t lineNumber) const
         {
-            size_t i = 0;
-            size_t sum = 0;
+            std::size_t i = 0;
+            std::size_t sum = 0;
             for (; i < children.size(); ++i)
             {
                 if (lineNumber < children[i].lineEnd)
@@ -49,8 +50,8 @@ namespace file
         std::string path;
         std::string source;
 
-        size_t lineStart{ 0 };
-        size_t lineEnd{ 0 };
+        std::size_t lineStart{ 0 };
+        std::size_t lineEnd{ 0 };
         std::vector<ShaderSourceInfo> children;
     };
 
@@ -102,7 +103,7 @@ namespace file
     void loadRawBuffer(const std::string& path, std::vector<char>& outBuffer, uint32_t& outNumValues);
 
     bool exists(const std::string& filename) noexcept;
-    size_t getSize(const std::string& filename);
+    std::size_t getSize(const std::string& filename);
 }
 
 namespace file

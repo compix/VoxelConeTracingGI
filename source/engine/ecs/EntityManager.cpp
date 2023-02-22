@@ -3,6 +3,7 @@
 #include "engine/event/EntityDeactivatedEvent.h"
 #include "engine/event/EntityActivatedEvent.h"
 #include <string>
+#include <cstddef>
 
 ComponentTypeID EntityManager::s_componentTypeIDCounter = 0;
 
@@ -12,7 +13,7 @@ void EntityManager::destroy(const Entity& entity)
     assert(valid(entity));
 
     // Call the destructors of the components
-    for (size_t i = 0; i < m_componentPools.size(); ++i)
+    for (std::size_t i = 0; i < m_componentPools.size(); ++i)
     {
         auto pool = m_componentPools[i];
         if (pool && m_componentMasks[i].test(i))
@@ -32,7 +33,7 @@ std::vector<ComponentPtr<Component>> EntityManager::getAllComponents(const Entit
 
     std::vector<ComponentPtr<Component>> components;
 
-    for (size_t componentTypeID = 0; componentTypeID < m_componentPools.size(); ++componentTypeID)
+    for (std::size_t componentTypeID = 0; componentTypeID < m_componentPools.size(); ++componentTypeID)
     {
         // Check if the entity has this component
         if (m_componentMasks[entity.m_id].test(componentTypeID))
@@ -42,7 +43,7 @@ std::vector<ComponentPtr<Component>> EntityManager::getAllComponents(const Entit
     return components;
 }
 
-void EntityManager::removeComponent(const Entity& entity, size_t componentTypeID)
+void EntityManager::removeComponent(const Entity& entity, std::size_t componentTypeID)
 {
     assert(valid(entity) && hasComponent(entity, componentTypeID));
     m_componentMasks[entity.m_id].reset(componentTypeID);
@@ -73,32 +74,32 @@ bool EntityManager::isActive(const Entity& entity)
     return m_active[entity.m_id];
 }
 
-bool EntityManager::hasComponent(const Entity& entity, size_t componentTypeID) const
+bool EntityManager::hasComponent(const Entity& entity, std::size_t componentTypeID) const
 {
     assert(valid(entity));
     return m_componentMasks[entity.m_id].test(componentTypeID);
 }
 
-const Component* EntityManager::getComponentPtr(const Entity& entity, size_t componentTypeID) const
+const Component* EntityManager::getComponentPtr(const Entity& entity, std::size_t componentTypeID) const
 {
     assert(valid(entity) && hasComponent(entity, componentTypeID));
     return getPool(componentTypeID)->getPtr(entity.m_id);
 }
 
-Component* EntityManager::getComponentPtr(const Entity& entity, size_t componentTypeID)
+Component* EntityManager::getComponentPtr(const Entity& entity, std::size_t componentTypeID)
 {
     assert(valid(entity) && hasComponent(entity, componentTypeID));
     return getPool(componentTypeID)->getPtr(entity.m_id);
 }
 
-Pool<Component>* EntityManager::getPool(size_t componentTypeID)
+Pool<Component>* EntityManager::getPool(std::size_t componentTypeID)
 {
     assert(componentTypeID < m_componentPools.size());
     assert(m_componentPools[componentTypeID]);
     return static_cast<Pool<Component>*>(m_componentPools[componentTypeID]);
 }
 
-const Pool<const Component>* EntityManager::getPool(size_t componentTypeID) const
+const Pool<const Component>* EntityManager::getPool(std::size_t componentTypeID) const
 {
     assert(componentTypeID < m_componentPools.size());
     assert(m_componentPools[componentTypeID]);
@@ -114,7 +115,7 @@ EntityManager::~EntityManager()
 
 void EntityManager::update()
 {
-    for (size_t componentTypeID = 0; componentTypeID < m_componentPools.size(); ++componentTypeID)
+    for (std::size_t componentTypeID = 0; componentTypeID < m_componentPools.size(); ++componentTypeID)
     {
         auto componentPool = m_componentPools[componentTypeID];
         ComponentMask mask;
@@ -122,7 +123,7 @@ void EntityManager::update()
 
         if (componentPool)
         {
-            for (size_t i = 0; i < componentPool->size(); ++i)
+            for (std::size_t i = 0; i < componentPool->size(); ++i)
             {
                 Component* c = reinterpret_cast<Component*>(componentPool->get(i));
 
@@ -137,7 +138,7 @@ void EntityManager::update()
 
 void EntityManager::lateUpdate()
 {
-    for (size_t componentTypeID = 0; componentTypeID < m_componentPools.size(); ++componentTypeID)
+    for (std::size_t componentTypeID = 0; componentTypeID < m_componentPools.size(); ++componentTypeID)
     {
         auto componentPool = m_componentPools[componentTypeID];
         ComponentMask mask;
@@ -145,7 +146,7 @@ void EntityManager::lateUpdate()
 
         if (componentPool)
         {
-            for (size_t i = 0; i < componentPool->size(); ++i)
+            for (std::size_t i = 0; i < componentPool->size(); ++i)
             {
                 Component* c = reinterpret_cast<Component*>(componentPool->get(i));
 
@@ -238,7 +239,7 @@ void Entity::setActive(bool active) const { m_manager->setActive(*this, active);
 
 bool Entity::isActive() const { return m_manager->isActive(*this); }
 
-ComponentPtr<Component>::ComponentPtr(const Entity& owner, size_t typeID)
+ComponentPtr<Component>::ComponentPtr(const Entity& owner, std::size_t typeID)
     : m_owner(owner), m_typeID(typeID)
 {
 #if defined(DEBUG) || defined(_DEBUG)

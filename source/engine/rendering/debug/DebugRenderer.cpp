@@ -10,6 +10,7 @@
 #include <engine/rendering/renderer/MeshRenderer.h>
 #include <engine/rendering/renderer/MeshRenderers.h>
 #include "engine/rendering/voxelConeTracing/Globals.h"
+#include <cstddef>
 
 std::shared_ptr<SimpleMeshRenderer> DebugRenderer::m_lineMeshRenderer;
 std::shared_ptr<SimpleMeshRenderer> DebugRenderer::m_nonFilledCubeMeshRenderer;
@@ -25,8 +26,8 @@ std::shared_ptr<Shader> DebugRenderer::m_nonFilledCubeShader;
 std::shared_ptr<Shader> DebugRenderer::m_instancedQuadShader;
 std::unique_ptr<SimpleMeshRenderer> DebugRenderer::m_instancedQuadRenderer;
 std::vector<QuadInstanceData> DebugRenderer::m_quadInstanceData;
-size_t DebugRenderer::m_maxQuadInstances = 100;
-size_t DebugRenderer::m_quadInstanceIdx = 0;
+std::size_t DebugRenderer::m_maxQuadInstances = 100;
+std::size_t DebugRenderer::m_quadInstanceIdx = 0;
 float DebugRenderer::m_quadInstanceScale = 1.0f;
 glm::mat4 DebugRenderer::m_view;
 glm::mat4 DebugRenderer::m_proj;
@@ -387,7 +388,7 @@ void DebugRenderer::loadInstancedQuad()
 {
     m_quadInstanceData.resize(m_maxQuadInstances);
 
-    for (size_t i = 0; i < m_maxQuadInstances; ++i)
+    for (std::size_t i = 0; i < m_maxQuadInstances; ++i)
     {
         m_quadInstanceData[i].pos.x = i / 10.0f;
         m_quadInstanceData[i].color = glm::vec4(i / 100.0f, 0.0f, 0.0f, 1.0f);

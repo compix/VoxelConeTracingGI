@@ -15,6 +15,7 @@
 #include "engine/gui/GUI.h"
 #include "engine/util/ECSUtil/EntityCreator.h"
 #include "engine/rendering/lights/DirectionalLight.h"
+#include <cstddef>
 
 VoxelConeTracingGUI::VoxelConeTracingGUI(RenderPipeline* renderPipeline)
     : m_renderPipeline(renderPipeline)
@@ -194,9 +195,9 @@ void VoxelConeTracingGUI::onVoxelVisualization()
             if (m_visualizeTexture)
                 m_visualizer->visualize3DTexture(*m_visualizedVoxelTex, glm::vec3(0.0f), uint32_t(i), m_padding, m_voxelSize);
             else
-                m_visualizer->visualize3DClipmapGS(*m_visualizedVoxelTex, clipRegions->at(size_t(i)), uint32_t(i), prevRegion, hasPrevLevel, hasMultipleFaces, numColorComponents);
+                m_visualizer->visualize3DClipmapGS(*m_visualizedVoxelTex, clipRegions->at(std::size_t(i)), uint32_t(i), prevRegion, hasPrevLevel, hasMultipleFaces, numColorComponents);
             hasPrevLevel = true;
-            prevRegion = clipRegions->at(size_t(i));
+            prevRegion = clipRegions->at(std::size_t(i));
         }
     }
 }
@@ -334,14 +335,14 @@ void VoxelConeTracingGUI::showSettings(const std::string& label, const VCTSettin
 
 void VoxelConeTracingGUI::showTextures(const ImVec2& canvasSize, std::initializer_list<GUITexture> textures) const
 {
-    size_t count = textures.size();
-    size_t nColumns = size_t(ceil(sqrtf(float(count))));
-    size_t nRows = size_t(ceil(float(count) / nColumns));
+    std::size_t count = textures.size();
+    std::size_t nColumns = std::size_t(ceil(sqrtf(float(count))));
+    std::size_t nRows = std::size_t(ceil(float(count) / nColumns));
 
     auto panelSize = ImVec2(canvasSize.x / nColumns, canvasSize.y / nRows - 25.0f);
     auto textureSize = ImVec2(canvasSize.x / nColumns, canvasSize.y / nRows - 50.0f);
 
-    size_t i = 0;
+    std::size_t i = 0;
 
     for (auto& tex : textures)
     {

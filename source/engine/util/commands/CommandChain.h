@@ -2,6 +2,7 @@
 #include "Command.h"
 #include <vector>
 #include <memory>
+#include <cstddef>
 
 /**
 * Executes a chain of commands.
@@ -46,6 +47,6 @@ public:
 
 private:
     std::vector<std::shared_ptr<Command>> m_commands;
-    size_t m_curCommandIdx = 0;
+    std::size_t m_curCommandIdx = 0;
     bool m_loop{ false };
 };

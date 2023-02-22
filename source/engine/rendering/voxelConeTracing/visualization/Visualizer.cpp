@@ -5,6 +5,7 @@
 #include "engine/rendering/voxelConeTracing/Globals.h"
 #include "engine/rendering/voxelConeTracing/VoxelRegion.h"
 #include "engine/rendering/voxelConeTracing/settings/VoxelConeTracingSettings.h"
+#include <cstddef>
 
 Visualizer::Visualizer()
 {
@@ -165,7 +166,7 @@ void Visualizer::showFrustum(const Frustum& frustum)
 std::unique_ptr<SimpleMeshRenderer> Visualizer::initTexture3DRenderer(int resolution)
 {
     // Create the mesh for the voxel visualization
-    size_t vertexCount = size_t(resolution * resolution * resolution);
+    std::size_t vertexCount = std::size_t(resolution * resolution * resolution);
     MeshBuilder meshBuilder(vertexCount);
 
     std::vector<VertexUint16> vertices;
@@ -194,7 +195,7 @@ std::unique_ptr<SimpleMeshRenderer> Visualizer::initTexture3DFaceRenderer(int re
 {
     // m_voxelFaceRenderer
     // Create the mesh for the voxel visualization
-    size_t vertexCount = size_t(resolution * resolution * resolution) * 6;
+    std::size_t vertexCount = std::size_t(resolution * resolution * resolution) * 6;
     MeshBuilder meshBuilder(1);
 
     m_faceVertices.reserve(vertexCount);

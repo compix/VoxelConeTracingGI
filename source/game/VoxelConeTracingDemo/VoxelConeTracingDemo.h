@@ -8,6 +8,7 @@
 #include <engine/geometry/BBox.h>
 #include "gui/VoxelConeTracingGUI.h"
 #include "engine/rendering/voxelConeTracing/ClipmapUpdatePolicy.h"
+#include <cstddef>
 
 class VoxelConeTracingDemo : public Game, InputHandler
 {
@@ -25,7 +26,7 @@ protected:
 private:
     void init3DVoxelTextures();
 
-    BBox getBBox(size_t clipmapLevel) const;
+    BBox getBBox(std::size_t clipmapLevel) const;
 
     void createDemoScene();
     void animateDirLight();

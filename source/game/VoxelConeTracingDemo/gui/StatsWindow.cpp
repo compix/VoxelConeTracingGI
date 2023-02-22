@@ -1,5 +1,6 @@
 #include "StatsWindow.h"
 #include "engine/util/QueryManager.h"
+#include <cstddef>
 
 uint32_t StatsWindow::ElapsedTimeGUIData::m_idCounter = 0;
 
@@ -41,7 +42,7 @@ void StatsWindow::plotHistogram(const ElapsedTimeInfo& timeInfo, const ElapsedTi
 
     std::vector<float> historyF(valueCount, 0.0f);
     auto history = timeInfo.getHistory(-halfValueCount - timeInfo.getAddedEntryCount() % halfValueCount - 1, -1);
-    for (size_t i = 0; i < history.size(); ++i)
+    for (std::size_t i = 0; i < history.size(); ++i)
         historyF[i] = history[i].elapsedTimeInMicroseconds / 1000.0f;
 
     if (historyF.size() > 0)

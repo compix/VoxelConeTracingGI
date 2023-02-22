@@ -1,6 +1,7 @@
 #include "convert.h"
+#include <cstddef>
 
-size_t convert::sizeFromGLType(GLenum type)
+std::size_t convert::sizeFromGLType(GLenum type)
 {
     switch (type)
     {

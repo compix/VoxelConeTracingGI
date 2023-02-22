@@ -6,6 +6,7 @@
 #include <unordered_map>
 #include <cassert>
 #include "EntityManager.h"
+#include <cstddef>
 
 class ECS
 {
@@ -39,10 +40,10 @@ public:
     }
 
     template <class... Components>
-    static size_t getEntityCountWithComponents();
+    static std::size_t getEntityCountWithComponents();
 
     template <class... Components>
-    static size_t getEntityCountWithComponentsIncludeInactive();
+    static std::size_t getEntityCountWithComponentsIncludeInactive();
 private:
     static EntityManager m_entityManager;
     static std::unordered_map<std::type_index, System*> m_systems;
@@ -67,9 +68,9 @@ void ECS::removeSystem()
 }
 
 template <class ... Components>
-size_t ECS::getEntityCountWithComponents()
+std::size_t ECS::getEntityCountWithComponents()
 {
-    size_t count = 0;
+    std::size_t count = 0;
 
     for (auto e : m_entityManager.getEntitiesWithComponents<Components...>())
     {
@@ -80,9 +81,9 @@ size_t ECS::getEntityCountWithComponents()
 }
 
 template <class ... Components>
-size_t ECS::getEntityCountWithComponentsIncludeInactive()
+std::size_t ECS::getEntityCountWithComponentsIncludeInactive()
 {
-    size_t count = 0;
+    std::size_t count = 0;
 
     for (auto e : m_entityManager.getEntitiesWithComponentsIncludeInactive<Components...>())
     {

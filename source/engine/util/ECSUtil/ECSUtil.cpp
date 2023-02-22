@@ -8,11 +8,12 @@
 #include "engine/rendering/lights/DirectionalLight.h"
 #include "engine/rendering/voxelConeTracing/Globals.h"
 #include "engine/rendering/util/GLUtil.h"
+#include <cstddef>
 
 void setTextures(const std::string& textureName, const std::string& baseTexturePath,
                  const std::vector<std::string>& texturePaths, Material* material, Texture2DSettings settings)
 {
-    for (size_t i = 0; i < texturePaths.size(); ++i)
+    for (std::size_t i = 0; i < texturePaths.size(); ++i)
     {
         auto texture = ResourceManager::getTexture(baseTexturePath + texturePaths[i], settings);
 

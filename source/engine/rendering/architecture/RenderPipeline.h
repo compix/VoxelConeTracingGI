@@ -6,6 +6,7 @@
 #include <memory>
 #include "RenderPass.h"
 #include <engine/util/Logger.h>
+#include <cstddef>
 
 class RenderPipeline
 {
@@ -13,7 +14,7 @@ class RenderPipeline
     {
         MemoryBlock() {}
 
-        MemoryBlock(size_t size, char* data)
+        MemoryBlock(std::size_t size, char* data)
             :size(size), data(data) {}
 
         template<class T>
@@ -36,7 +37,7 @@ class RenderPipeline
         template<class T>
         T* get() { return reinterpret_cast<T*>(data); }
 
-        size_t size{ 0 };
+        std::size_t size{ 0 };
         char* data{ nullptr };
     };
 
@@ -67,10 +68,10 @@ public:
     template <class T, class ... Ts>
     void addRenderPasses(std::shared_ptr<T> renderPass, std::shared_ptr<Ts> ... renderPasses);
 
-    std::shared_ptr<RenderPass> getRenderPass(const std::string& name, size_t idx = 0);
+    std::shared_ptr<RenderPass> getRenderPass(const std::string& name, std::size_t idx = 0);
 
     template <class T>
-    std::shared_ptr<T> getRenderPass(size_t idx = 0);
+    std::shared_ptr<T> getRenderPass(std::size_t idx = 0);
 
     void update();
 
@@ -160,7 +161,7 @@ void RenderPipeline::addRenderPasses(std::shared_ptr<T> renderPass, std::shared_
 }
 
 template <class T>
-std::shared_ptr<T> RenderPipeline::getRenderPass(size_t idx)
+std::shared_ptr<T> RenderPipeline::getRenderPass(std::size_t idx)
 {
     auto typeIdx = std::type_index(typeid(T));
     auto it = m_renderPassesByTypeIdx.find(typeIdx);

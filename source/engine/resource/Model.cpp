@@ -1,4 +1,5 @@
 #include "Model.h"
+#include <cstddef>
 
 void Model::addChild(std::shared_ptr<Model> model)
 {
@@ -34,9 +35,9 @@ std::vector<MaterialDescription> Model::getAllMaterials() const
     return allMaterials;
 }
 
-size_t Model::getTriangleCount() const
+std::size_t Model::getTriangleCount() const
 {
-    size_t triangleCount = 0;
+    std::size_t triangleCount = 0;
 
     for (auto& sm : subMeshes)
         triangleCount += sm.indices.size() / 3;

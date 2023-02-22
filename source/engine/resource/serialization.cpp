@@ -1,5 +1,6 @@
 #include "serialization.h"
 #include "Model.h"
+#include <cstddef>
 
 // ****************************** Model ******************************
 void Serializer::write(std::ofstream& os, const Model& val)
@@ -38,10 +39,10 @@ std::shared_ptr<Model> Serializer::readModel(std::ifstream& is)
     model->rotation = read<glm::quat>(is);
 
     // Number of SubMeshes
-    model->subMeshes.resize(read<size_t>(is));
+    model->subMeshes.resize(read<std::size_t>(is));
 
     // SubMeshes
-    for (size_t i = 0; i < model->subMeshes.size(); ++i)
+    for (std::size_t i = 0; i < model->subMeshes.size(); ++i)
     {
         Mesh::SubMesh& subMesh = model->subMeshes[i];
 
@@ -54,10 +55,10 @@ std::shared_ptr<Model> Serializer::readModel(std::ifstream& is)
     }
 
     // Number of children
-    model->children.resize(read<size_t>(is));
+    model->children.resize(read<std::size_t>(is));
 
     // Children
-    for (size_t i = 0; i < model->children.size(); ++i)
+    for (std::size_t i = 0; i < model->children.size(); ++i)
     {
         model->children[i] = readModel(is);
         model->children[i]->parent = model.get();

@@ -2,6 +2,7 @@
 #include <fstream>
 #include <memory>
 #include <engine/rendering/geometry/Mesh.h>
+#include <cstddef>
 
 struct Model;
 class Transform;
@@ -46,7 +47,7 @@ void Serializer::writeVector(std::ofstream& os, const std::vector<T>& v)
 template <class T>
 void Serializer::readVector(std::ifstream& is, std::vector<T>& v)
 {
-    v.resize(read<size_t>(is));
-    for (size_t i = 0; i < v.size(); ++i)
+    v.resize(read<std::size_t>(is));
+    for (std::size_t i = 0; i < v.size(); ++i)
         v[i] = read<T>(is);
 }

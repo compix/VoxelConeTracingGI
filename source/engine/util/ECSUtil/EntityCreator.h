@@ -2,6 +2,7 @@
 #include "engine/ecs/EntityManager.h"
 #include <glm/glm.hpp>
 #include "engine/rendering/Material.h"
+#include <cstddef>
 
 class EntityCreator
 {
@@ -19,8 +20,8 @@ private:
     static std::shared_ptr<Material> createMaterial();
 
 private:
-    static size_t m_boxCounter;
-    static size_t m_cylinderCounter;
-    static size_t m_sphereCounter;
-    static size_t m_dirLightCounter;
+    static std::size_t m_boxCounter;
+    static std::size_t m_cylinderCounter;
+    static std::size_t m_sphereCounter;
+    static std::size_t m_dirLightCounter;
 };
