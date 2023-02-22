@@ -2,6 +2,7 @@
 #include "engine/event/event.h"
 #include "engine/event/EntityDeactivatedEvent.h"
 #include "engine/event/EntityActivatedEvent.h"
+#include <string>
 
 ComponentTypeID EntityManager::s_componentTypeIDCounter = 0;
 
